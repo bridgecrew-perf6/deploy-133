@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" style="font-family: Verdana;">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Spodify - {{ message[ "episode_name" ] }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- InstantSearch CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/@meilisearch/instant-meilisearch/templates/basic_search.css" />
+    <script src="https://unpkg.com/@meilisearch/instant-meilisearch@0.3.2/dist/instant-meilisearch.umd.min.js"></script>
+    <!-- Jquery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap CDN -->
+    <script src="https://unpkg.com/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+        integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+        crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://unpkg.com/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+        crossorigin="anonymous"></script>
+
+    <!-- Font-Awesome CDN -->
+    <script src="https://kit.fontawesome.com/5327a5f721.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap" rel="stylesheet">
+
+    <!-- 幻燈片 -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src="./script.js"></script>
+    <!-- 推薦卡片樣式 -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.1/tailwind.min.css'>
+
+    <!-- 右邊卡片式推薦episode的scss黨檔 -->
+    <!-- <link href="./../static/card.scss" rel="stylesheet"> -->
+
+    <!-- player CSS/JS -->
+    <!-- <link href="./podcast_recommendation/frontend/subpage2/static/demo3player.css" rel="stylesheet"> -->
+    <!-- <link href="C:\Users\Jenny\podcast_recommendation\frontend\subpage2\static\demo3player.css" rel="stylesheet"> -->
+    <link href="/static/demo3player.css?v=41" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <audio src={{ message[ "episode_audio" ] }} id="song"></audio>
+    <div class="container-fluid" style="background-color: #FCF7F4 ; height: 100%;">
+
+        <div class="lds-spinner"  id="onload" style="left: 50%; top: 50%;">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    
+
+        <div class="row">
+            <div class="col">
+                <p
+                    style="position: absolute; width: 492px; height: 93px; left: -100px; top: 0px; font-family:'Signika Negative', sans-serif; font-style: normal; font-weight: normal; font-size: 30px; line-height: 93px; color: #da3c36;
+                    ">
+                    <a href="http://localhost:5000/"><b>SPODify</b></a>
+                </p>
+                <!-- 這裡是幻燈片的部分，空白的地方模糊還沒有用好 -->
+                <div class="slideshow" style="position: relative;  overflow: hidden; border-radius: 15px;left: 50px;">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image1" data-bgcolor="#317a5c">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image2" data-bgcolor="#dedede">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image3" data-bgcolor="#ff0000">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image4" data-bgcolor="#000000">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image5" data-bgcolor="#317a5c">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image6" data-bgcolor="#dedede">
+                    <img src="hhttps://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image7" data-bgcolor="#ff0000">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image8" data-bgcolor="#000000">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image9" data-bgcolor="#317a5c">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image10" data-bgcolor="#dedede">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image11" data-bgcolor="#ff0000">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image12" data-bgcolor="#000000">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image13" data-bgcolor="#317a5c">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image14" data-bgcolor="#dedede">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image15" data-bgcolor="#ff0000">
+                    <img src="https://dummyimage.com/320x240/fff/fff.jpg&text=1" id="image16" data-bgcolor="#000000">
+                    <div class="background-image"></div>
+                </div>
+
+                <!-- Captions -->
+                <div class="row"
+                    style="position:relative;background-color: 	rgb(241, 230, 223);color: black;height: 100px;width: 100%;margin-left: 45px;margin-top: 90px;border-radius: 10px;z-index: 1;
+                    display: flex; justify-content: center;  align-items: center;@media (min-width:768px) {
+                        .row {
+                            position: relative;
+                        }
+                    };">
+                    <p style="display: none;" id="caption_all">
+                        <!-- {{ message[ "captions" ] }} -->
+            
+                    </p>
+                    <p id="currentKeyword" style="display: none;"></p>
+                    <p id="caption" ref="caption"></p>
+                </div>
+                <!-- Keywords推薦 -->
+                <div class="rowkey" style="height: 80px;margin:2px 2px 2px 45px;width:100%;padding: 0px 0px 0px 12px;" id="kw-vue">
+                    <div class="col-md-12" style=" position:relative ;top: 10px;">
+                        <transition-group name="list-complete" tag="p" style="text-align: left;">
+                            <button style="margin:5px ;" v-for="input in inputs" v-bind:key="input[0]" type="button"
+                                :class="input[3]" data-toggle="tooltip" :title="input[1]">
+                                <a target="_blank" rel="noopener noreferrer" :href="input[2]" style="font-size:15px;color:white">%%%
+                                    input[0] %%%</a>
+                            </button>
+                        </transition-group>
+                    </div>
+                </div>
+
+
+                <div class="rowplayer" style="position:absolute;background-color: 	#D0D0D0 transparent;width: 45%;height: 170px;margin-top:100px ;margin-left: 55px;
+                  @media (min-width:768px) {
+                        .rowplayer {
+                            position: relative;
+                            width: 150px;
+                            
+                        }
+                    }
+                ">
+                </div>
+                <div class="rowplay">
+                    <!-- 這是慢轉5秒鍵，但還沒弄好 -->
+                    <!-- <div class="col-md-2" style="z-index: 3;">
+                            <button class="pbtn lg neu buttons"><i class="fas fa-fast-backward"></i></button>
+                        </div> -->
+                    <!-- 播放暫停鍵 -->
+                    <div class="col-md-2" style="z-index: 3;">
+                        <!-- class="pbtn lg neu buttons"  -->
+                        <button class="pbtn lg neu buttons" onclick="playPause()">
+                            <!-- <i class="fas fa-play" id="play-pause"></i> -->
+                            <i class="fas fa-play-circle fa-4x" id="play-pause"></i>
+                        </button>
+                    </div>
+                    <!-- 這是快轉5秒鍵，但還沒弄好 -->
+                    <!-- <div class="col-md-2" style="z-index: 3;">
+                            <button class="pbtn lg neu buttons"><i class="fas fa-fast-forward"></i></button>
+    
+                        </div> -->
+                </div>
+                <!-- 這裡是可拉episode長短的地方 -->
+                <div class="rowtrack" style="position: relative ; top:70px;left:160px; width: 80%;
+                    /* @media (min-width:768px) {
+                        .rowtrack {
+                            position: relative;
+                            width: 450px;
+                            
+                        }
+                    } */
+                ">
+                    <div class="col-md-2" style=" width: 100%; ">
+                        <div class="track neu" id="outside">
+                            <div id="inside">
+                                <input type="range" id="pgbar" style="width:100% ;--min: 0;
+                                        --max: 100;
+                                        --val: 0" value="0" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin:2px">
+                            <div class="col-md-6" style="color: #808080;">
+                                <div class="currentTime"></div>
+                            </div>
+                            <div class="col-md-6" style="color: #808080;">
+                                <div class="durationTime"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+            <!-- <div class="col" style="overflow-y: scroll;height: 1000px;margin-top:80px"> -->
+            <div class="col" style="margin-top:80px;margin-left: 30px;">
+                <div>
+                    <p style="font-size:25px ;font-weight: bold;">
+                        Podcast Information
+                    </p>
+                </div>
+                <!-- 右邊推薦episode卡片的地方 -->
+                <div class="episode-card-wrapper">
+                    <a href="/episode/{{ message['recommendation'][0]['episode_uri'] }}" class="episode-card"
+                        style="transform: translateY(0px)!important;">
+                        <div class="card-header">
+                            <div class="cover-image-wrapper">
+                                <img class="cover-image" width="150px" height="150px" loading="lazy"
+                                    src="{{ message['poster'] }}">
+                            </div>
+                            <div class="episode-info-wrapper">
+                                <h3 class="title">{{ message['episode_name'] }}</h3>
+                                <div class="info" style="font-family:'Signika Negative', sans-serif;">{{ message['show_name'] }}
+                                    <!-- <span class="icon-explicit"></span>
+                                    <span class="channel"></span> -->
+                                </div>
+                                <div class="card-content">
+                                    <p class="description" style="font-family:'Signika Negative', sans-serif;">{{ message["recommendation"][0]['episode_description'] }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="card-content">
+                            <p class="description">{{ message['recommendation'][0]['episode_description'] }}</p>
+                        </div> -->
+                        <!-- <div class="card-footer">
+                            <span class="date">2021-03-16</span>
+                            <span class="duration">35 mins</span>
+                        </div> -->
+                    </a>
+                </div>
+
+                <div>
+                    <p style="font-size:25px ;font-weight: bold;">
+                        Recommended Podcasts
+                    </p>
+                </div>
+
+                <div class="episode-card-wrapper">
+                    <a href="/episode/{{ message['recommendation'][1]['episode_uri'] }}" class="episode-card">
+                        <div class="card-header">
+                            <div class="cover-image-wrapper">
+                                <img class="cover-image" width="150px" height="150px" loading="lazy"
+                                    src="{{ message['recommendation'][1]['poster'] }}">
+                            </div>
+                            <div class="episode-info-wrapper">
+                                <h3 class="title" >{{ message["recommendation"][1]['episode_name'] }}</h3><br>
+                                <div class="card-content">
+                                    <p class="description" style="font-family:'Signika Negative', sans-serif;">{{ message["recommendation"][1]['episode_description'] }}</p>
+                                </div>
+                                <!-- <div class="info">
+                                    <span class="icon-explicit"></span>
+                                    <span class="channel"></span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <!-- <div class="card-content">
+                            <p class="description">{{ message["recommendation"][1]['episode_description'] }}</p>
+                        </div> -->
+                        <!-- <div class="card-footer">
+                            <span class="date">2021-03-16</span>
+                            <span class="duration">35 mins</span>
+                        </div> -->
+                    </a>
+                </div>
+
+                <div class="episode-card-wrapper">
+                    <a href="/episode/{{ message['recommendation'][2]['episode_uri'] }}" class="episode-card">
+                        <div class="card-header">
+                            <div class="cover-image-wrapper">
+                                <img class="cover-image" width="150px" height="150px" loading="lazy"
+                                    src="{{ message['recommendation'][2]['poster'] }}">
+                            </div>
+                            <div class="episode-info-wrapper">
+                                <h3 class="title">{{ message["recommendation"][2]['episode_name'] }}</h3><br>
+                                <div class="card-content">
+                                    <p class="description" style="font-family:'Signika Negative', sans-serif;">{{ message["recommendation"][2]['episode_description'] }}</p>
+                                </div>
+                                <!-- <div class="info">
+                                    <span class="icon-explicit"></span>
+                                    <span class="channel"></span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <!-- <div class="card-content">
+                            <p class="description">{{ message["recommendation"][2]['episode_description'] }}</p>
+                        </div> -->
+                        <!-- <div class="card-footer">
+                            <span class="date">2021-03-16</span>
+                            <span class="duration">35 mins</span>
+                        </div> -->
+                    </a>
+                </div>
+
+                <div class="episode-card-wrapper">
+                    <a href="/episode/{{ message['recommendation'][3]['episode_uri'] }}" class="episode-card">
+                        <div class="card-header">
+                            <div class="cover-image-wrapper">
+                                <img class="cover-image" width="150px" height="150px" loading="lazy"
+                                    src="{{ message['recommendation'][3]['poster'] }}">
+                            </div>
+                            <div class="episode-info-wrapper">
+                                <h3 class="title">{{ message["recommendation"][3]['episode_name'] }}</h3><br>
+                                <div class="card-content">
+                                    <p class="description" style="font-family:'Signika Negative', sans-serif;">{{ message["recommendation"][3]['episode_description'] }}</p>
+                                </div>
+                                <!-- <div class="info">
+                                    <span class="icon-explicit"></span>
+                                    <span class="channel"></span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <!-- <div class="card-content">
+                            <p class="description">{{ message["recommendation"][3]['episode_description'] }}</p>
+                        </div> -->
+                        <!-- <div class="card-footer">
+                            <span class="date">2021-03-16</span>
+                            <span class="duration">35 mins</span>
+                        </div> -->
+                    </a>
+                </div>
+
+                <!-- <div class="episode-card-wrapper">
+                    <a href="/episode/{{ message['recommendation'][4]['episode_uri'] }}" class="episode-card">
+                        <div class="card-header">
+                            <div class="cover-image-wrapper">
+                                <img class="cover-image" width="150px" height="150px" loading="lazy" src="{{ message['recommendation'][4]['poster'] }}">
+                            </div>
+                            <div class="episode-info-wrapper">
+                                <h3 class="title">{{ message["recommendation"][4]['episode_name'] }}</h3>
+                                <div class="info">
+                                    <span class="icon-explicit"></span>
+                                    <span class="channel"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="description">{{ message["recommendation"][4]['episode_description'] }}</p>
+                        </div>
+                    </a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+<style>
+</style>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+<script src="/static/demo3player.js?v=7"></script>
+
+</html>

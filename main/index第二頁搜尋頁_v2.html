@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <!-- InstantSearch CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch/templates/basic_search.css" />
+    <link rel="stylesheet" href="./reset_第二頁搜尋頁_v2.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch@0.3.2/dist/instant-meilisearch.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main class="main">
+
+        <div class="left">
+            <p style="position: absolute; width: 492px; height: 93px; left: 30px; top: 0px; font-family: Roboto; font-style: normal;
+          font-weight: normal; font-size: 30px; line-height: 93px; color: #FFFFFF;"><b>PRSystem</b></p>
+
+            <div id="searchbox"></div>
+
+            <div class="sidebar">
+                <!-- <a href="./index_copy_V3.html" >Home</a>
+            <a href="http://localhost:5000/episode/2XL2UdYBBhTy6AvkItjVRO" >Goback</a> -->
+            </div>
+        </div>
+        <div class="hits" id="hits" style="height: 63vh;">
+            <!-- <div class="top"></div> -->
+        </div>
+        <div class="bottom"></div>
+        <div style="clear:both;"></div>
+    </main>
+</body>
+<style>
+    body {
+        font-family: sans-serif;
+        padding: 1em;
+    }
+    
+    .ais-SearchBox {
+        margin: 1em 0;
+    }
+</style>
+<script>
+    function openNav() {
+
+        document.getElementById("mySidenav").style.width = "250px";
+
+    }
+
+    function closeNav() {
+
+        document.getElementById("mySidenav").style.width = "0";
+
+    }
+    const search = instantsearch({
+        // MeiliSearch Index name
+        indexName: "podcast",
+        // MeiliSearch Server url
+        searchClient: instantMeiliSearch(
+            "http://localhost:7700"
+        )
+    });
+
+    search.addWidgets([
+        instantsearch.widgets.searchBox({
+            // html id of your searchbox
+            container: "#searchbox",
+            // what will appear when nothing is typed
+            placeholder: "Search your podcast ...",
+            // input auto focus (default false)
+            autofocus: true,
+            showSubmit: false,
+            // searchAsYouType (default true)
+            // showSubmit(button) (default true)
+            // showLoadingIndicator (default false)
+        }),
+        instantsearch.widgets.configure({
+            hitsPerPage: 100
+        }),
+        instantsearch.widgets.infiniteHits({
+            container: "#hits",
+            templates: {
+                empty: 'No results for <q>{{ query }}</q>',
+                showMoreText: `
+          <div class="show_more">
+              <h4>show more results</h4>
+          </div>`,
+                item(hit) {
+                    return `
+              <div class="row"  >
+                <a href="http://localhost:5000/episode/${hit.episode_uri}">
+                <div class="front" >
+                    <div class="img">
+                      <img src="${hit.poster}" />
+                    </div>
+                    <div class="info">
+                      <p class="hit-publisher">
+                        ${instantsearch.highlight({ attribute: 'show_name', highlightedTagName: 'mark', hit })}
+                      </p>
+                      <p class="hit-episode">
+                        ${instantsearch.highlight({ attribute: 'episode_name', highlightedTagName: 'mark', hit })}
+                      </p>
+                    </div>
+                    <div class="description">
+                      ${hit.episode_description}
+                    </div> 
+                </div>   
+                </a>         
+              </div>`;
+                }
+            }
+        })
+    ]);
+    search.start();
+</script>
+
+</html>
